@@ -5,6 +5,7 @@ class CreateFoods < ActiveRecord::Migration
       t.text :desc
       t.decimal :price
       t.string :category
+      t.string :image_url
 
       t.timestamps null: false
     end
