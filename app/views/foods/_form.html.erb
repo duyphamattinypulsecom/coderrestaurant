@@ -1,4 +1,4 @@
-<%= form_for(@food) do |f| %>
+<%= simple_form_for(@food) do |f| %>
   <% if @food.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@food.errors.count, "error") %> prohibited this food from being saved:</h2>
@@ -11,23 +11,15 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :desc %><br>
-    <%= f.text_area :desc %>
-  </div>
-  <div class="field">
-    <%= f.label :price %><br>
-    <%= f.text_field :price %>
-  </div>
-  <div class="field">
-    <%= f.label :category %><br>
-    <%= f.text_field :category %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.input :name, placeholder: 'food name' %>
+  <%= f.input :desc, placeholder: 'food description' %>
+  <%= f.input :price, placeholder: 'food price' %>
+
+  <%= f.input :category, collection: ["Breakfast", "Lunch"] %>
+
+
+  <%= f.input :image_url, placeholder: 'food sample image' %>
+
+  <%= f.button :submit %>
+
 <% end %>
