@@ -26,6 +26,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'foundation-rails'
 
 gem 'simple_form'
+gem 'faker'
 
 
 # Use ActiveModel has_secure_password
