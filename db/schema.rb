@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151203075202) do
+ActiveRecord::Schema.define(version: 20151207114946) do
 
   create_table "foods", force: :cascade do |t|
     t.string   "name"
@@ -23,4 +23,15 @@ ActiveRecord::Schema.define(version: 20151203075202) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "rate"
+    t.string   "comment"
+    t.integer  "food_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "reviews", ["food_id"], name: "index_reviews_on_food_id", using: :btree
+
+  add_foreign_key "reviews", "foods"
 end

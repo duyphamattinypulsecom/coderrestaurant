@@ -5,34 +5,7 @@ class FoodsController < ApplicationController
   # GET /foods.json
   def index
     @category = Food.Category
-
-    query = nil
-    if params[:category]
-      query = "category like '%#{params[:category]}%'"
-      params.delete(:search)  # don't want to search when user select category
-    end
-
-    if params[:search]
-      query = "name like '%#{params[:search]}%'"
-    end
-
-    params[:sort] ||= 'name-asc'
-    order = 'name ASC'
-    if params[:sort] == 'name-desc'
-      order = 'name DESC'
-    end
-    if params[:sort] == 'price-asc'
-      order = 'price ASC'
-    end
-    if params[:sort] == 'price-desc'
-      order = 'price DESC'
-    end
-
-    if query
-      @foods = Food.where(query).order(order)
-    else
-      @foods = Food.all.order(order)
-    end
+    @foods = get_foods
   end
 
   # GET /foods/1
@@ -40,21 +13,8 @@ class FoodsController < ApplicationController
   def show
     @category = Food.Category
     @selectedFood = Food.where(id: params[:id])
-
-    query = nil
-    if params[:category]
-      query = "category like '%#{params[:category]}%'"
-    end
-
-    if params[:search]
-      query = "name like '%#{params[:search]}%'"
-    end
-
-    if query
-      @foods = Food.where(query)
-    else
-      @foods = Food.all
-    end
+    @foods = get_foods
+    @reviews = Review.where(food_id: params[:id])
   end
 
   # GET /foods/new
@@ -115,5 +75,35 @@ class FoodsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def food_params
       params.require(:food).permit(:name, :desc, :price, :category, :image_url)
+    end
+
+    def get_foods
+      query = nil
+      if params[:category]
+        query = "category like '%#{params[:category]}%'"
+        params.delete(:search)  # don't want to search when user select category
+      end
+
+      if params[:search]
+        query = "name like '%#{params[:search]}%'"
+      end
+
+      params[:sort] ||= 'name-asc'
+      order = 'name ASC'
+      if params[:sort] == 'name-desc'
+        order = 'name DESC'
+      end
+      if params[:sort] == 'price-asc'
+        order = 'price ASC'
+      end
+      if params[:sort] == 'price-desc'
+        order = 'price DESC'
+      end
+
+      if query
+        @foods = Food.where(query).order(order)
+      else
+        @foods = Food.all.order(order)
+      end
     end
 end
