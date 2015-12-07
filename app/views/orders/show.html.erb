@@ -1,15 +1,16 @@
 <div class="row new-order-container">
-  <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-12">
-    <h3>Your orders <span class="pull-right"><%= @totalCost %></span> </h3>
+  <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12">
+    <h3>Your orders <span class="label label-default pull-right"><%= number_to_currency(@totalCost, :unit => '$ ') %></span> </h3>
 
+    <div class="card-group">
     <% @orderDetail.each do |o| %>
     	<div class="card">
         <%= image_tag o.image_url, class: "card-img-top center-block", alt: o.name %>
     	  <div class="card-block">
-  	      <h4 class="card-title"><%= o.name %><span class="pull-right"><%= o.price %></span></h4>
+  	      <h4 class="card-title"><%= o.name %><span class="label label-default pull-right"><%= number_to_currency(o.price, :unit => '$ ') %></span></h4>
     	  </div>
     	</div>
     <% end %>
-
-</div>
+    </div>
+    </div>
 </div>  
