@@ -11,18 +11,20 @@
     </div>
     <div>
       <% @foods.each do |food| %>
-        <%= link_to (food.name + content_tag(:span, food.price, :class => "label label-default pull-right")).html_safe, food_path(food), class: "btn btn-secondary col-sm-12 col-lg-12 col-md-12 menu-food-item" %>
+        <%= link_to (food.name + content_tag(:span, food.price, :class => "label label-default pull-right")).html_safe, food_path(food, :search => params[:search]), class: "btn btn-secondary col-sm-12 col-lg-12 col-md-12 menu-food-item" %>
       <% end %>
     </div>
   </div>
   <div class="col-lg-6">
-    <div class="input-group">
-      <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search for..." %>
+    <%= form_tag "/foods", method: 'get', enforce_utf8: false do %>
+      <div class="input-group">
+        <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search for..." %>
 
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="submit">Go!</button>
-      </span>
-    </div>
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="submit">Go!</button>
+        </span>
+      </div>
+    <% end %>
     <% @selectedFood.each do |sf| %>
       <div class="card">
         <%= image_tag sf.image_url, class: "card-img-top center-block img-responsive", alt: sf.name %> 

@@ -4,16 +4,26 @@ class FoodsController < ApplicationController
   # GET /foods
   # GET /foods.json
   def index
-    @foods = Food.all
     @category = Food.Category
+    
+    if params[:search]
+      @foods = Food.where("name like ?", "%#{params[:search]}%")
+    else
+      @foods = Food.all
+    end
   end
 
   # GET /foods/1
   # GET /foods/1.json
   def show
-    @foods = Food.all
     @category = Food.Category
     @selectedFood = Food.where(id: params[:id])
+
+    if params[:search]
+      @foods = Food.where("name like ?", "%#{params[:search]}%")
+    else
+      @foods = Food.all
+    end
   end
 
   # GET /foods/new
