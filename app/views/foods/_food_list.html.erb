@@ -1,0 +1,11 @@
+<div class="btn-group">
+  <% @category.each do |c| %>
+    <%= link_to c, foods_path(:category => c), class: "btn btn-secondary" %>
+  <% end %>
+</div>
+<div>
+  <% @foods.each do |food| %>
+    <%= link_to (food.name + content_tag(:span, number_to_currency(food.price, :unit => "$ "), :class => "label label-default pull-right")).html_safe,
+                food_path(food, :search => params[:search], :category => params[:category]), class: "btn btn-secondary col-sm-12 col-lg-12 col-md-12 menu-food-item" %>
+  <% end %>
+</div>

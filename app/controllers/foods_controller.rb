@@ -5,9 +5,19 @@ class FoodsController < ApplicationController
   # GET /foods.json
   def index
     @category = Food.Category
-    
+
+    query = nil;
+    if params[:category]
+      query = "category like '%#{params[:category]}%'"
+    end
+
     if params[:search]
-      @foods = Food.where("name like ?", "%#{params[:search]}%")
+      query = "name like '%#{params[:search]}%'"
+    end
+
+
+    if query
+      @foods = Food.where(query)
     else
       @foods = Food.all
     end
@@ -19,8 +29,17 @@ class FoodsController < ApplicationController
     @category = Food.Category
     @selectedFood = Food.where(id: params[:id])
 
+    query = nil;
+    if params[:category]
+      query = "category like '%#{params[:category]}%'"
+    end
+
     if params[:search]
-      @foods = Food.where("name like ?", "%#{params[:search]}%")
+      query = "name like '%#{params[:search]}%'"
+    end
+
+    if query
+      @foods = Food.where(query)
     else
       @foods = Food.all
     end
