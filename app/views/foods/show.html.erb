@@ -1,29 +1,39 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @food.name %>
-</p>
+<h1>Menu</h1>
 
-<p>
-  <strong>Desc:</strong>
-  <%= @food.desc %>
-</p>
+<div class="row">
+  <div class="col-lg-6">
+    <div class="btn-group">
+      <% @category.each do |c| %>
+        <%= link_to c, {controller: 'foods'}, class: "btn btn-secondary" %>
+      <% end %>
+    </div>
+    <div>
+      <% @foods.each do |food| %>
+        <%= link_to (food.name + content_tag(:span, food.price, :class => "label label-default pull-right")).html_safe, food_path(food), class: "btn btn-secondary col-sm-12 col-lg-12 col-md-12 menu-food-item" %>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="input-group">
+      <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search for..." %>
 
-<p>
-  <strong>Price:</strong>
-  <%= @food.price %>
-</p>
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="submit">Go!</button>
+      </span>
+    </div>
+    <% @selectedFood.each do |sf| %>
+      <div class="card">
+        <%= image_tag sf.image_url, class: "card-img-top center-block img-responsive", alt: sf.name %> 
+        <div class="card-block">
+          <h4 class="card-title"><%= sf.name %></h4>
+          <p class="card-text"><%= sf.desc %></p>
+          <a href="#" class="btn btn-primary">Create order</a>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
 
-<p>
-  <strong>Category:</strong>
-  <%= @food.category %>
-</p>
-
-<p>
-  <strong>Image url:</strong>
-  <%= @food.image_url %>
-</p>
-
-<%= link_to 'Edit', edit_food_path(@food) %> |
-<%= link_to 'Back', foods_path %>
+<%= link_to 'New Food', new_food_path %>

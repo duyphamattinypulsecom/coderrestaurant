@@ -13,7 +13,7 @@
       name: food,
       desc: Faker::Lorem.paragraph(2, true, 4),
       price: Faker::Commerce.price,
-      category: rand(4),  # breakfast, lunch, dinner, drinks
+      category: ["breakfast", "lunch", "dinner", "drinks"].sample,  # breakfast, lunch, dinner, drinks
       image_url: "http://loremflickr.com/320/240/#{food}?random=#{i}"
   )
 end

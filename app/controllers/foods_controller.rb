@@ -5,11 +5,15 @@ class FoodsController < ApplicationController
   # GET /foods.json
   def index
     @foods = Food.all
+    @category = Food.Category
   end
 
   # GET /foods/1
   # GET /foods/1.json
   def show
+    @foods = Food.all
+    @category = Food.Category
+    @selectedFood = Food.where(id: params[:id])
   end
 
   # GET /foods/new
