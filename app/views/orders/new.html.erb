@@ -1,0 +1,37 @@
+<div class="row new-order-container">
+  <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-12">
+  	<h3>New order for</h3><h1><%= @selectedFood.name %></h1>
+
+  	<div class="card">
+      <%= image_tag @selectedFood.image_url, class: "card-img-top center-block", alt: @selectedFood.name %>
+  	  <div class="card-block">
+  	    <p class="card-text"><%= @selectedFood.desc %></p>
+  	  </div>
+  	</div>
+
+  	<%= simple_form_for(:order, :url => food_orders_path(@selectedFood)) do |o| %>
+  	  <% if @order.errors.any? %>
+  	    <div id="error_explanation">
+  	      <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+  	      <ul>
+  	      <% @order.errors.full_messages.each do |message| %>
+  	        <li><%= message %></li>
+  	      <% end %>
+  	      </ul>
+  	    </div>
+  	  <% end %>
+
+      <% if @firstOrder %>
+        
+      <% end %>
+
+  	  <%= o.input :name, placeholder: 'your name', required: false, label_html: { class: '' }, input_html: {readonly: @readonly, class: 'form-control', value: @firstOrder['name']}, wrapper_html: {class: 'form-group'} %>
+  	  <%= o.input :phone, placeholder: 'your phone number', required: false, label_html: { class: '' }, input_html: {readonly: @readonly, class: 'form-control', value: @firstOrder['phone'], type: 'text'}, wrapper_html: {class: 'form-group'}%>
+  	  <%= o.input :address, placeholder: 'your delivery address', required: false, label_html: { class: '' }, input_html: {readonly: @readonly, class: 'form-control', value: @firstOrder['address'] }, wrapper_html: {class: 'form-group'}  %>
+
+  	  <%= o.button :submit, class: 'btn btn-danger' %>
+  	  <%= link_to "Back", food_path(@selectedFood) %>
+  	<% end %>
+  </div>  
+</div>

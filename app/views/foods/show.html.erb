@@ -16,8 +16,9 @@
         <div class="card-block">
           <h4 class="card-title"><%= sf.name %></h4>
           <p class="card-text"><%= sf.desc %></p>
-          <a href="#" class="btn btn-primary">Create order</a>
-          <%= link_to 'Add comment', new_review_path(:food => sf), :class => 'btn btn-primary' %>
+
+          <%= link_to "Create order", new_food_order_path(sf), class: "btn btn-primary" %>
+          <%= link_to 'Add comment', new_food_review_path(sf), :class => 'btn btn-primary' %>
         </div>
       </div>
     <% end %>

@@ -23,6 +23,17 @@ ActiveRecord::Schema.define(version: 20151207114946) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.string   "name"
+    t.string   "phone"
+    t.text     "address"
+    t.integer  "food_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "orders", ["food_id"], name: "index_orders_on_food_id", using: :btree
+
   create_table "reviews", force: :cascade do |t|
     t.integer  "rate"
     t.string   "comment"
@@ -33,5 +44,6 @@ ActiveRecord::Schema.define(version: 20151207114946) do
 
   add_index "reviews", ["food_id"], name: "index_reviews_on_food_id", using: :btree
 
+  add_foreign_key "orders", "foods"
   add_foreign_key "reviews", "foods"
 end

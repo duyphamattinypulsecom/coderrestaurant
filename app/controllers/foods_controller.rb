@@ -14,7 +14,7 @@ class FoodsController < ApplicationController
     @category = Food.Category
     @selectedFood = Food.where(id: params[:id])
     @foods = get_foods
-    @reviews = Review.where(food_id: params[:id])
+    @reviews = Review.where(food_id: params[:id]).order('updated_at DESC')
   end
 
   # GET /foods/new
