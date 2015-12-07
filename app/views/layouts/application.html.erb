@@ -27,7 +27,7 @@
       <ul class="nav navbar-nav pull-right">
         <li class="nav-item">
           <% if session[:order] %>
-            <%= link_to "Orders", orders_show_path %>
+            <%= link_to "Orders (#{session[:order].count})", orders_show_path%>
           <% end %>
         </li>
       </ul>
