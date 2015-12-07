@@ -1,0 +1,9 @@
+<span class="rating">
+  <% (1..5).each do |i| %>
+      <% if i <= rate %>
+        <span class="fa fa-star"></span>
+      <% else %>
+        <span class="fa fa-star-o"></span>
+      <% end %>
+  <% end %>
+</span>

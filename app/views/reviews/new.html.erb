@@ -1,0 +1,33 @@
+<h3>New review for</h3><h1 class="inline"><%= @selectedFood.name %></h1>
+<div class="row new-order-container">
+  <div class="col-lg-6">
+    <%= simple_form_for(:review, :url => food_reviews_path(@selectedFood)) do |o| %>
+        <% if @review.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@@review.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+              <ul>
+                <% @@review.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+        <% end %>
+
+        <%= o.input :rate, :collection => 1..5, placeholder: 'Rate from 1 to 5', required: false, label_html: { class: '' }, input_html: {class: 'form-control'}, wrapper_html: {class: 'form-group'} %>
+        <%= o.input :comment, required: false, label_html: { class: '' }, input_html: {class: 'form-control'}, wrapper_html: {class: 'form-group'}  %>
+
+        <%= o.button :submit, class: 'btn btn-danger' %>
+        <%= link_to "Back", food_path(@selectedFood) %>
+    <% end %>
+  </div>
+
+    <div class="col-lg-6">
+      <div class="card">
+        <%= image_tag @selectedFood.image_url, class: "card-img-top center-block", alt: @selectedFood.name %>
+        <div class="card-block">
+          <p class="card-text"><%= @selectedFood.desc %></p>
+        </div>
+      </div>
+    </div>
+</div>

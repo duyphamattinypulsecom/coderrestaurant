@@ -2,7 +2,8 @@ Rails.application.routes.draw do
 
   get 'orders/show'
 
-  resources :foods do 
+  resources :foods do
+    resources :reviews
     resources :orders
   end
 
