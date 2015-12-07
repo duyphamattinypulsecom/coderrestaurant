@@ -6,7 +6,7 @@ class FoodsController < ApplicationController
   def index
     @category = Food.Category
 
-    query = nil;
+    query = nil
     if params[:category]
       query = "category like '%#{params[:category]}%'"
     end
@@ -15,11 +15,22 @@ class FoodsController < ApplicationController
       query = "name like '%#{params[:search]}%'"
     end
 
+    params[:sort] ||= 'name-asc'
+    order = 'name ASC'
+    if params[:sort] == 'name-desc'
+      order = 'name DESC'
+    end
+    if params[:sort] == 'price-asc'
+      order = 'price ASC'
+    end
+    if params[:sort] == 'price-desc'
+      order = 'price DESC'
+    end
 
     if query
-      @foods = Food.where(query)
+      @foods = Food.where(query).order(order)
     else
-      @foods = Food.all
+      @foods = Food.all.order(order)
     end
   end
 
@@ -29,7 +40,7 @@ class FoodsController < ApplicationController
     @category = Food.Category
     @selectedFood = Food.where(id: params[:id])
 
-    query = nil;
+    query = nil
     if params[:category]
       query = "category like '%#{params[:category]}%'"
     end

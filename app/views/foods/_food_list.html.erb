@@ -1,11 +1,32 @@
-<div class="btn-group">
-  <% @category.each do |c| %>
-    <%= link_to c, foods_path(:category => c), class: "btn btn-secondary #{'active' if params[:category]==c}" %>
-  <% end %>
-</div>
 <div>
+  <div class="food-header col-sm-12 col-lg-12 col-md-12 menu-food-item">
+    <% sort_name_icon_html = ''
+       sort_name_next_value = 'name-asc'
+       if params[:sort] == 'name-asc'
+         sort_name_icon_html = "<i class='fa fa-arrow-down'></i>"
+         sort_name_next_value = 'name-desc'
+       end
+       if params[:sort] == 'name-desc'
+         sort_name_icon_html = "<i class='fa fa-arrow-up'></i>"
+         sort_name_next_value = 'name-asc'
+       end
+    %>
+    <%= link_to ('Name ' + sort_name_icon_html).html_safe, foods_path(params.merge(:sort => sort_name_next_value)) %>
+    <% sort_price_icon_html = ''
+       sort_price_next_value = 'price-desc'
+       if params[:sort] == 'price-asc'
+         sort_price_icon_html = "<i class='fa fa-arrow-up'></i>"
+         sort_price_next_value = 'price-desc'
+       end
+       if params[:sort] == 'price-desc'
+         sort_price_icon_html = "<i class='fa fa-arrow-down'></i>"
+         sort_price_next_value = 'price-asc'
+       end
+    %>
+    <%= link_to ('Price ' + sort_price_icon_html).html_safe, foods_path(params.merge(:sort => sort_price_next_value)), :class => 'pull-right' %>
+  </div>
   <% @foods.each do |food| %>
-    <%= link_to (food.name + content_tag(:span, number_to_currency(food.price, :unit => "$ "), :class => "label label-default pull-right")).html_safe,
-                food_path(food, :search => params[:search], :category => params[:category]), class: "btn btn-secondary col-sm-12 col-lg-12 col-md-12 menu-food-item" %>
+    <%= link_to (food.name + content_tag(:span, number_to_currency(food.price, :unit => '$ '), :class => "label label-default pull-right")).html_safe,
+                food_path(food, :params => params), class: "btn btn-secondary col-sm-12 col-lg-12 col-md-12 menu-food-item" %>
   <% end %>
 </div>
