@@ -9,6 +9,7 @@ class FoodsController < ApplicationController
     query = nil
     if params[:category]
       query = "category like '%#{params[:category]}%'"
+      params.delete(:search)  # don't want to search when user select category
     end
 
     if params[:search]
