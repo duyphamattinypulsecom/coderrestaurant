@@ -1,6 +1,10 @@
 @import "bootstrap";
-
+@import "order";
 
 .menu-food-item {
-   text-align: left
+   text-align: left;
+}
+
+.content-container {
+	margin-top: 70px;
 }

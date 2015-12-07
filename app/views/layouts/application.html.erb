@@ -10,9 +10,32 @@
   </head>
 
   <body>
-	
+
 	<div class="container">
-		<%= yield %>
+    <nav class="navbar navbar-light bg-faded navbar-fixed-top nav-container">
+      <ul class="nav navbar-nav pull-left">
+        <li class="nav-item">
+          <%= link_to "Home", root_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Menu", foods_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Contact us", contact_index_path, class: "nav-link" %>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+        <li class="nav-item">
+          <% if session[:order] %>
+            <%= link_to "Orders", orders_show_path %>
+          <% end %>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="content-container">
+		  <%= yield %>
+    </div>
 	</div>
 
   </body>

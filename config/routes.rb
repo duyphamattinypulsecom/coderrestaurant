@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
 
-  resources :foods
+  get 'orders/show'
+
+  resources :foods do 
+    resources :orders
+  end
+
   get 'contact/index'
 
   # The priority is based upon order of creation: first created -> highest priority.
