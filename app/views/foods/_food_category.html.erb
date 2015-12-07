@@ -1,0 +1,5 @@
+<div class="btn-group">
+  <% @category.each do |c| %>
+      <%= link_to c, foods_path(params.merge(:category => c)), class: "btn btn-secondary #{'active' if params[:category]==c}" %>
+  <% end %>
+</div>

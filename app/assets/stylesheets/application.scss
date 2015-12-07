@@ -1,8 +1,14 @@
 @import "bootstrap";
 @import "order";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 
 .menu-food-item {
-   text-align: left;
+   text-align: left
+}
+
+.food-header {
+  margin-top: 24px;
 }
 
 .content-container {

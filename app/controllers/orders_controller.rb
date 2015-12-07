@@ -3,9 +3,11 @@ class OrdersController < ApplicationController
   	@selectedFood = Food.find(params[:food_id])
   	@order = Order.new
   	@order.food = @selectedFood
-    @firstOrder = session[:order].first
+
+    @firstOrder = Order.new
     @readonly = false
-    if @firstOrder
+    if session[:order]
+      @firstOrder = session[:order].first
       @readonly = true
     end
   end
