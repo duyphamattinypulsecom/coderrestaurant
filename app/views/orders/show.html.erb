@@ -2,12 +2,19 @@
   <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12">
     <h3>Your orders <span class="label label-default pull-right"><%= number_to_currency(@totalCost, :unit => '$ ') %></span> </h3>
 
+    <%= simple_form_for(:order) do |o| %>
+      <%= o.input :name, required: false, label_html: { class: '' }, input_html: {readonly: true, class: 'form-control', value: session[:order].first['name']}, wrapper_html: {class: 'form-group'} %>
+      <%= o.input :phone, placeholder: 'your phone number', required: false, label_html: { class: '' }, input_html: {readonly: true, class: 'form-control', value: session[:order].first['phone'], type: 'text'}, wrapper_html: {class: 'form-group'}%>
+      <%= o.input :address, placeholder: 'your delivery address', required: false, label_html: { class: '' }, input_html: {readonly: true, class: 'form-control', value: session[:order].first['address'] }, wrapper_html: {class: 'form-group'}  %>
+    <% end %>
+
     <div class="card-group">
     <% @orderDetail.each do |o| %>
     	<div class="card">
         <%= image_tag o.image_url, class: "card-img-top center-block", alt: o.name %>
     	  <div class="card-block">
   	      <h4 class="card-title"><%= o.name %><span class="label label-default pull-right"><%= number_to_currency(o.price, :unit => '$ ') %></span></h4>
+          <p class="card-text"><%= o.created_at.strftime("%a, %b %d, %Y - %I:%M %p") %></p>
     	  </div>
     	</div>
     <% end %>

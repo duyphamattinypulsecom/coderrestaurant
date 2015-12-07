@@ -22,10 +22,6 @@
   	    </div>
   	  <% end %>
 
-      <% if @firstOrder %>
-        
-      <% end %>
-
   	  <%= o.input :name, placeholder: 'your name', required: false, label_html: { class: '' }, input_html: {readonly: @readonly, class: 'form-control', value: @firstOrder['name']}, wrapper_html: {class: 'form-group'} %>
   	  <%= o.input :phone, placeholder: 'your phone number', required: false, label_html: { class: '' }, input_html: {readonly: @readonly, class: 'form-control', value: @firstOrder['phone'], type: 'text'}, wrapper_html: {class: 'form-group'}%>
   	  <%= o.input :address, placeholder: 'your delivery address', required: false, label_html: { class: '' }, input_html: {readonly: @readonly, class: 'form-control', value: @firstOrder['address'] }, wrapper_html: {class: 'form-group'}  %>
