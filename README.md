@@ -6,7 +6,7 @@ Submitted by: **Duy Pham & Phuong Doan**
 
 Time spent: **24** working hours spent in total
 
-URL: **Insert your Heroku URL here**
+URL: **https://coderrestaurant.herokuapp.com/**
 
 ## User Stories
 
