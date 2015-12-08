@@ -4,12 +4,11 @@ class OrdersController < ApplicationController
   	@order = Order.new
   	@order.food = @selectedFood
 
-    @firstOrder = Order.new
     @readonly = false
     if session[:order]
-      @firstOrder = session[:order].first
       @readonly = true
     end
+    
   end
 
   def show
@@ -33,7 +32,13 @@ class OrdersController < ApplicationController
         format.json { render :show, status: :created, location: @order }
         @order.food = @selectedFood
         session[:order] << @order
+        session[:userName] = @order.name
+        session[:userPhone] = @order.phone
+        session[:userAddress] = @order.address
       else
+        session[:userName] = @order.name
+        session[:userPhone] = @order.phone
+        session[:userAddress] = @order.address
         format.html { render :new }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
